@@ -1,0 +1,59 @@
+{
+  "valid_records": 1000,
+  "rejected_records_excluding_duplicates": 10,
+  "exact_duplicates_removed": 10,
+  "remaining_duplicate_rows": 0,
+  "missing_values_in_valid_records": {
+    "Order ID": 0,
+    "Customer ID": 0,
+    "Restaurant ID": 0,
+    "Order Date and Time": 0,
+    "Delivery Date and Time": 0,
+    "Order Value": 40,
+    "Delivery Fee": 50,
+    "Payment Method": 50,
+    "Discounts and Offers": 240,
+    "Commission Fee": 40,
+    "Payment Processing Fee": 50,
+    "Refunds/Chargebacks": 40,
+    "Weather Condition": 0,
+    "Order Channel": 0,
+    "Delivery_Time_Minutes": 0,
+    "Platform_Net_Revenue": 172
+  },
+  "datetime_dtypes": {
+    "Order Date and Time": "datetime64[us]",
+    "Delivery Date and Time": "datetime64[us]"
+  },
+  "financial_dtypes": {
+    "Order Value": "float64",
+    "Delivery Fee": "float64",
+    "Commission Fee": "float64",
+    "Payment Processing Fee": "float64",
+    "Refunds/Chargebacks": "float64"
+  },
+  "delivery_duration_calculation": "PASS",
+  "platform_net_revenue_calculation": "PASS",
+  "validation_status": "PASS",
+  "source_file": "food_orders.csv",
+  "batch_size": 100,
+  "total_records_extracted_this_run": 1010,
+  "total_source_batches": 11,
+  "raw_records_loaded_this_run": 1010,
+  "raw_table_total_after_load": 1010,
+  "total_raw_records_retrieved": 1010,
+  "total_valid_records_transformed": 1000,
+  "total_rejected_records_including_duplicates": 10,
+  "total_transformed_records_loaded_this_run": 1000,
+  "analytics_table_total_after_load": 1000,
+  "raw_successful_batches": 11,
+  "raw_failed_batches": 0,
+  "analytics_successful_batches": 11,
+  "analytics_failed_batches": 0,
+  "transformation_decisions": {
+    "duplicates": "Exact duplicate source rows are removed using a SHA-256 fingerprint of all original columns across all batches.",
+    "missing_values": "Unknown values are not replaced with zero. Revenue remains NULL when any required revenue component is missing.",
+    "invalid_records": "Missing/unparseable order or delivery timestamps and negative delivery durations are rejected with reasons.",
+    "long_deliveries": "Durations over 180 minutes are retained but can be reviewed separately; this is not used as an automatic rejection rule."
+  }
+}
