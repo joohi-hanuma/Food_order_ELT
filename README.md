@@ -86,28 +86,3 @@ After the pipeline completes, open `business_analysis.sql` in MySQL Workbench or
 
 The included `validation_report.json` records checks that can be performed directly from the supplied CSV without a live MySQL service. It explicitly says the MySQL-backed workflow was not executed in this prepared environment. After running `elt_batch_pipeline.py` on your computer, the pipeline replaces that report with counts from your database-backed run. Review the `validation_status`, record totals, rejected rows, and batch success/failure counts before submitting. The counts in the runtime report depend on your database state; use a fresh empty database for a clean, reproducible run.
 
-## Publish your own GitHub repository
-
-Create an **empty** repository under your own GitHub account (do not choose “Add a README” if you already have this folder's README). From a terminal, run these commands from the project directory. Replace `YOUR_GITHUB_USERNAME` and `YOUR_REPOSITORY_NAME` with your own values:
-
-```bash
-git init
-git add README.md requirements.txt .gitignore .env.example *.py *.sql *.ipynb *.csv validation_report.json
-git status
-git commit -m "Submit food orders ELT pipeline and analysis"
-git branch -M main
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git
-git push -u origin main
-```
-
-Before committing, check `git status` and confirm that `.env` is not listed. If Git asks for authentication, sign in through the official GitHub flow or use a personal access token as GitHub prompts; never place a token in a file or share it. Your public repository link will be:
-
-```text
-https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME
-```
-
-## Message to your instructor
-
-After pushing and checking that the repository opens in a private/incognito window, send:
-
-> Hello Sir, I have completed the Food Orders Data Understanding and Batch ELT Pipeline assignment. The Jupyter notebook, Python pipeline, SQL analysis, source CSV, README, and validation report are available here: **[paste your GitHub repository link]**. Thank you.
