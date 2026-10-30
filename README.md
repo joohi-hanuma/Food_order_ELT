@@ -51,37 +51,6 @@ python -m pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Edit `.env` with your local MySQL values. For example:
-
-```text
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=your_local_mysql_password
-# CSV_FILE=/absolute/path/to/food_orders.csv
-BATCH_SIZE=100
-```
-
-Do not commit `.env` or share your database password. The Python code creates the two databases and tables if they do not exist; the MySQL account needs permission to create databases and tables and insert/select data.
-
-## Run the notebook
-
-Open `food_orders_analysis.ipynb` in Jupyter Notebook, JupyterLab, or VS Code with the project environment selected. Run all cells from top to bottom. Keep `food_orders.csv` beside the notebook, or adjust `CSV_PATH` in its first code cell.
-
-## Run the complete ELT workflow
-
-From the project directory with the virtual environment active and MySQL running:
-
-```bash
-python elt_batch_pipeline.py
-```
-
-The run prints batch progress and a final execution summary. It writes `validation_report.json`, `rejected_records.csv`, and `transformed_valid_records.csv` in this folder. The pipeline appends batches; a rerun against the same databases will ingest source rows again. For a fresh assignment run, use empty databases/tables. If you choose to clear tables, make sure you are not deleting data you need to preserve.
-
-## Run the SQL analysis
-
-After the pipeline completes, open `business_analysis.sql` in MySQL Workbench or another MySQL client. Execute the statements against `food_orders_analytics_db`. Totals and averages use non-NULL values in the analytics table; missing values are not silently converted to zero.
-
 ## Validation and report notes
 
 The included `validation_report.json` records checks that can be performed directly from the supplied CSV without a live MySQL service. It explicitly says the MySQL-backed workflow was not executed in this prepared environment. After running `elt_batch_pipeline.py` on your computer, the pipeline replaces that report with counts from your database-backed run. Review the `validation_status`, record totals, rejected rows, and batch success/failure counts before submitting. The counts in the runtime report depend on your database state; use a fresh empty database for a clean, reproducible run.
